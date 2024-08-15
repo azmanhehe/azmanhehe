@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>I Love You</title>
+    <style>
+        body {
+            background-color: #ffcccc;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            overflow: hidden;
+        }
+        .message-container {
+            text-align: center;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            position: relative;
+        }
+        .message-container h1 {
+            font-size: 3em;
+            color: #ff0066;
+        }
+        .message-container p {
+            font-size: 1.5em;
+            color: #333;
+        }
+        .heart {
+            color: #ff0066;
+            font-size: 2em;
+        }
+        .falling-heart {
+            position: absolute;
+            top: -50px;
+            color: #ff0066;
+            font-size: 2em;
+            animation: fall linear infinite;
+        }
+        @keyframes fall {
+            to {
+                transform: translateY(100vh);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="message-container">
+        <h1 id="typewriter"></h1>
+        <p>You mean the world to me!</p>
+        <p class="heart">❤️❤️❤️</p>
+    </div>
+
+    <!-- Musik Latar -->
+    <audio id="background-music" autoplay loop>
+        <source src="your-music-file.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+
+    <script>
+        // Efek Mesin Tik untuk Teks "I Love You"
+        const text = "I Love You ❤️, Elmi Itamala";
+        let index = 0;
+        function typeWriter() {
+            if (index < text.length) {
+                document.getElementById("typewriter").innerHTML += text.charAt(index);
+                index++;
+                setTimeout(typeWriter, 100);
+            }
+        }
+        typeWriter();
+
+        // Efek Hati Berjatuhan
+        function createFallingHeart() {
+            const heart = document.createElement("div");
+            heart.innerHTML = "❤️";
+            heart.classList.add("falling-heart");
+            heart.style.left = Math.random() * window.innerWidth + "px";
+            heart.style.animationDuration = 2 + Math.random() * 3 + "s";
+            document.body.appendChild(heart);
+
+            // Hapus hati setelah selesai animasi
+            setTimeout(() => {
+                heart.remove();
+            }, 5000);
+        }
+
+        // Buat hati berjatuhan setiap 500ms
+        setInterval(createFallingHeart, 500);
+    </script>
+</body>
+</html>
